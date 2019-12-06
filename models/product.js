@@ -45,6 +45,16 @@ module.exports = class Product {
     getProductsFromFile(callback)
   }
 
+  static deleteProduct(id, callback) {
+    getProductsFromFile(products => {
+      const updatedProducts = products.filter(product => product.id !== id)
+      fs.writeFile(p, JSON.stringify(updatedProducts), (e) => {
+        console.log(e)
+      })
+      callback()
+    })
+  }
+
   static findById(id, callback) {
     getProductsFromFile(products => {
       const product = products.find(p => p.id === id)
