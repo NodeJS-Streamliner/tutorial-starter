@@ -58,4 +58,15 @@ module.exports = class Cart {
       }
     })
   }
+
+  static getCart(callback) {
+    fs.readFile(p, (error, fileContent) => {
+      if (error) return callback(error)
+      let cart = { products: [], totalPrice: 0 }
+      if (fileContent != null && fileContent != '') {
+        cart = JSON.parse(fileContent)
+      }
+      callback(cart)
+    })
+  }
 }
