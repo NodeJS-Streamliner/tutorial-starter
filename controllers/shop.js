@@ -26,12 +26,14 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll((products) => {
+  Product.fetchAll().then(([rows, fieldData]) => {
     res.render('shop/index', {
-      prods: products,
+      prods: rows,
        pageTitle: 'Shop',
        path:'/'
      })
+  }).catch(error => {
+    console.log(error)
   })
 }
 

@@ -1,19 +1,5 @@
-const fs = require('fs')
-const path = require('path')
-
+const db = require('../util/database')
 const Cart = require('./cart')
-
-const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json')
-
-const getProductsFromFile = (callback) => {
-  fs.readFile(p, (error, fileContent) => {
-    if (error) {
-      callback([])
-    } else {
-      callback(JSON.parse(fileContent))
-    }
-  })
-}
 
 module.exports = class Product {
   constructor(id, title, imageUrl, description, price) {
@@ -25,44 +11,18 @@ module.exports = class Product {
   }
 
   save() {
-    getProductsFromFile(products => {
-      if (this.id) {
-        const existingProductIndex = products.findIndex(product => product.id === this.id)
-        const updatedProducts = [...products]
-        updatedProducts[existingProductIndex] = this
-        fs.writeFile(p, JSON.stringify(updatedProducts), (e) => {
-          console.log(e)
-        })
-      } else {
-        this.id = Math.random().toString()
-        products.push(this)
-        fs.writeFile(p, JSON.stringify(products), (e) => {
-          console.log(e)
-        })
-      }
-    })
+
   }
 
-  static fetchAll(callback) {
-    getProductsFromFile(callback)
+  static fetchAll() {
+    return db.execute("SELECT * FROM products")
   }
 
   static deleteProduct(id) {
-    getProductsFromFile(products => {
-      const product = products.find(prod => prod.id === id)
-      const updatedProducts = products.filter(product => product.id !== id)
-      fs.writeFile(p, JSON.stringify(updatedProducts), (e) => {
-        if (!e) {
-          Cart.deleteProduct(id, product.price)
-        } else console.log(e)
-      })
-    })
+
   }
 
-  static findById(id, callback) {
-    getProductsFromFile(products => {
-      const product = products.find(p => p.id === id)
-      callback(product)
-    })
+  static findById(id) {
+
   }
 }
