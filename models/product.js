@@ -11,11 +11,12 @@ module.exports = class Product {
   }
 
   save() {
-
+    return db.execute('INSERT INTO products (title, price, description, imageUrl) VALUES (?, ?, ?, ?)',
+      [this.title, this.price, this.description, this.imageUrl])
   }
 
   static fetchAll() {
-    return db.execute("SELECT * FROM products")
+    return db.execute('SELECT * FROM products')
   }
 
   static deleteProduct(id) {

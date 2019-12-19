@@ -13,7 +13,7 @@ const errorController = require('./controllers/error')
 const db = require('./util/database')
 
 db.execute('SELECT * FROM products').then(result => {
-  console.log(result)
+  console.log('connection to db successfully')
 }).catch(error => {
   console.log(error)
 })
