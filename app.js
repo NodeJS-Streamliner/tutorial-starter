@@ -14,6 +14,7 @@ const db = require('./util/database')
 
 db.execute('SELECT * FROM products').then(result => {
   console.log('connection to db successfully')
+  //console.log(result)
 }).catch(error => {
   console.log(error)
 })
