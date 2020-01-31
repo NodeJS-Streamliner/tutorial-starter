@@ -24,7 +24,7 @@ app.use(errorController.get404)
 sequelize
   .sync() // create tables for your model when you called define method
   .then(result => {
-    console.log(result)
+    console.log('success connection to database')
 
     app.listen(3000)
   })
