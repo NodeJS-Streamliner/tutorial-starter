@@ -27,6 +27,7 @@ exports.getProduct = (req, res, next) => {
     .catch(error => {
       console.error(error)
     })*/
+  // TODO: this code maybe run twice and the second time with product = null.
   Product.findByPk(productId)
   .then(product => {
     console.log('function getProduct = ' + product)
