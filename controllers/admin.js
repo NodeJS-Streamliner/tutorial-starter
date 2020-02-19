@@ -13,11 +13,12 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl
   const description = req.body.description
   const price = req.body.price
-  Product.create({
+  req.user.createProduct({
     title: title,
     price: price,
     imageUrl: imageUrl,
-    description: description
+    description: description,
+    userId: req.user.id
   }).then(result => {
     console.log(result)
     res.redirect('/admin/products')
