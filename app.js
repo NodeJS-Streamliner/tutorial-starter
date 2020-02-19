@@ -11,6 +11,8 @@ const shopRoutes = require('./routes/shop')
 const errorController = require('./controllers/error')
 
 const sequelize = require('./util/database')
+const Product = require('./models/product')
+const User = require('./models/user')
 
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -21,8 +23,13 @@ app.use(shopRoutes)
 
 app.use(errorController.get404)
 
+// if user delete all related products to this user will be deleted too
+Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'})
+
+User.hasMany(Product)
+
 sequelize
-  .sync() // create tables for your model when you called define method
+  .sync({force: true}) // create tables for your model when you called define method
   .then(result => {
     console.log('success connection to database')
 
