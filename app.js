@@ -13,6 +13,8 @@ const errorController = require('./controllers/error')
 const sequelize = require('./util/database')
 const Product = require('./models/product')
 const User = require('./models/user')
+const Cart = require('./models/cart')
+const CartItem = require('./models/cart-item')
 
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -35,12 +37,16 @@ app.use(errorController.get404)
 
 // if user delete all related products to this user will be deleted too
 Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'})
-
 User.hasMany(Product)
 
+User.hasOne(Cart)
+Cart.belongsTo(User)
+Cart.belongsToMany(Product, {through: CartItem})
+Product.belongsToMany(Cart, {through: CartItem})
+
 sequelize
-  //.sync({force: true})  // drop table and re-create
-  .sync() // create tables for your model when you called define method
+  .sync({force: true})  // drop table and re-create
+  //.sync() // create tables for your model when you called define method
   .then(result => {
     console.log('success connection to database')
     return User.findByPk(1)
