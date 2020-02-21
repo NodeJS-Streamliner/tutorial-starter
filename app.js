@@ -45,8 +45,8 @@ Cart.belongsToMany(Product, {through: CartItem})
 Product.belongsToMany(Cart, {through: CartItem})
 
 sequelize
-  .sync({force: true})  // drop table and re-create
-  //.sync() // create tables for your model when you called define method
+  //.sync({force: true})  // drop table and re-create
+  .sync() // create tables for your model when you called define method
   .then(result => {
     console.log('success connection to database')
     return User.findByPk(1)
@@ -61,7 +61,10 @@ sequelize
     return Promise.resolve(user);
   })
   .then(user => {
-    console.log(user)
+    return user.createCart()
+  })
+  .then(cart => {
+    console.log(cart)
     app.listen(3000)
   })
   .catch(e => {
