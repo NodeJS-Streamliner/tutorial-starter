@@ -51,7 +51,7 @@ Order.belongsToMany(Product, {through:  OrderItem })
 
 sequelize
   //.sync({force: true})  // drop table and re-create
-  .sync() // create tables for your model when you called define method
+   .sync() // create tables for your model when you called define method
   .then(result => {
     console.log('success connection to database')
     return User.findByPk(1)
