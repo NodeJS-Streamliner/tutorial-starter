@@ -32,7 +32,7 @@ exports.postAddProduct = (req, res, next) => {
     console.log(error)
   })*/
 }
-
+/*
 exports.getEditProduct = (req, res, next) => {
   const editMode = req.query.edit
   if (!editMode) {
@@ -115,4 +115,4 @@ exports.getProducts = (req, res, next) => {
     .catch (error => {
       console.error(error)
     })
-}
+}*/
