@@ -93,11 +93,9 @@ exports.postDeleteProduct = (req, res, next) => {
   //Product.deleteProduct(productId)
   res.redirect('/admin/products')
 }
-
+*/
 exports.getProducts = (req, res, next) => {
-  req.user
-    .getProducts()
-  //Product.findAll()
+  Product.fetchAll()
     .then(products => {
       res.render('admin/products', {
         prods: products,
@@ -108,4 +106,4 @@ exports.getProducts = (req, res, next) => {
     .catch (error => {
       console.error(error)
     })
-}*/
+}
