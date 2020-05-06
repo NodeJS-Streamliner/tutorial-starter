@@ -27,9 +27,8 @@ exports.getProduct = (req, res, next) => {
       console.error(error)
     })*/
   // TODO: this code maybe run twice and the second time with product = null.
-  Product.findByPk(productId)
+  Product.findById(productId)
   .then(product => {
-    console.log('function getProduct = ' + product)
     res.render('shop/product-details', {
       product: product,
       pageTitle: product.title,
