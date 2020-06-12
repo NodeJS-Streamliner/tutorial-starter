@@ -60,6 +60,19 @@ class Product {
         console.error(error)
       })
   }
+
+  static deleteById(id) {
+    const db = getDb()
+    return db
+      .collection('products')
+      .deleteOne({_id: new mongoDb.ObjectId(id)})
+      .then(result => {
+        console.log('deleted')
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
 }
 
 
