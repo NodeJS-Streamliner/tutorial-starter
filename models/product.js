@@ -12,7 +12,7 @@ class Product {
 
   save() {
     const db = getDb();
-    let dbOperation;
+    let dbOperation
     if (this._id) {
       // Update product
       dbOperation = db.collection('products')
