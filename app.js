@@ -24,7 +24,6 @@ app.use((req, res, next) => {
     .catch(error => {
       console.error(error)
     })
-  next()
 })
 
 app.use('/admin', adminRoutes)
