@@ -80,7 +80,7 @@ class User {
 
   addOrder() {
     const db = getDb()
-    db
+    return db
     .collection('orders')
     .insertOne(this.cart)
     .then(result => {
