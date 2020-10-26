@@ -20,14 +20,6 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const productId = req.params.productId;
-  /*Product.findAll({where: {id: productId}})
-    .then(products => {
-      console.log('products = ' + products)
-    })
-    .catch(error => {
-      console.error(error)
-    })*/
-  // TODO: this code maybe run twice and the second time with product = null.
   Product.findById(productId)
   .then(product => {
     res.render('shop/product-details', {
